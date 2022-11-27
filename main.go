@@ -13,9 +13,36 @@ func usage(progName string) {
 	fmt.Println("Example: ", progName, " 1")
 }
 
+// List of functions that solve a particular 'Day' problem
 var funcMap = map[int]func(){
 	1: Day_1,
 	2: Day_2,
+}
+
+func generateMenulist(app *tview.Application, menuList *tview.List) {
+	var r rune = 'a'
+	var entryStr string
+
+	for key, funcVal := range funcMap {
+		entryStr = "Day " + strconv.Itoa(key)
+		menuList.AddItem(entryStr, "", r, funcVal)
+		r++
+	}
+
+	menuList.AddItem("Quit", "Press to exit", 'q', func() {
+		app.Stop()
+	})
+}
+
+func runSingleDay(dayi int) {
+
+	dayFun, ok := funcMap[dayi]
+	if !ok {
+		fmt.Println("Challenge not ready for Day ", dayi)
+		os.Exit(0)
+	}
+
+	dayFun()
 }
 
 // Main
@@ -31,26 +58,17 @@ func main() {
 			os.Exit(1)
 		}
 
-		dayFun, ok := funcMap[dayi]
-		if !ok {
-			fmt.Println("Challenge not completed for Day ", dayi)
-			os.Exit(0)
-		}
-
-		dayFun()
+		runSingleDay(dayi)
 		os.Exit(1)
 	}
 
 	app := tview.NewApplication()
-	list := tview.NewList().
-		AddItem("Day 1", "", 'a', Day_1).
-		AddItem("Day 2", "", 'b', nil).
-		AddItem("Day 3", "", 'c', nil).
-		AddItem("Day 4", "", 'd', nil).
-		AddItem("Quit", "Press to exit", 'q', func() {
-			app.Stop()
-		})
-	if err := app.SetRoot(list, true).SetFocus(list).Run(); err != nil {
+	menuList := tview.NewList()
+
+	// Create the menu of challenge days that have solutions
+	generateMenulist(app, menuList)
+
+	if err := app.SetRoot(menuList, true).SetFocus(menuList).Run(); err != nil {
 		panic(err)
 	}
 }
