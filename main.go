@@ -47,8 +47,8 @@ func main() {
 	}
 
 	// Create the menu of challenge days that have solutions
-	appInit()
-	generateMenulist()
+	app := appInit()
+	menuList := generateMenulist()
 
 	if err := app.SetRoot(menuList, true).SetFocus(menuList).Run(); err != nil {
 		panic(err)
