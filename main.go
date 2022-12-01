@@ -4,14 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-
-	"github.com/rivo/tview"
 )
-
-func usage(progName string) {
-	fmt.Println(progName, " <day>")
-	fmt.Println("Example: ", progName, " 1")
-}
 
 // List of functions that solve a particular 'Day' problem
 var funcMap = map[int]func(){
@@ -19,19 +12,9 @@ var funcMap = map[int]func(){
 	2: Day_2,
 }
 
-func generateMenulist(app *tview.Application, menuList *tview.List) {
-	var r rune = 'a'
-	var entryStr string
-
-	for key, funcVal := range funcMap {
-		entryStr = "Day " + strconv.Itoa(key)
-		menuList.AddItem(entryStr, "", r, funcVal)
-		r++
-	}
-
-	menuList.AddItem("Quit", "Press to exit", 'q', func() {
-		app.Stop()
-	})
+func usage(progName string) {
+	fmt.Println(progName, " <day>")
+	fmt.Println("Example: ", progName, " 1")
 }
 
 func runSingleDay(dayi int) {
@@ -53,6 +36,7 @@ func main() {
 	if len(os.Args) == 2 {
 		dayi, err := strconv.Atoi(os.Args[1])
 
+		// Single arg needs to be an int
 		if err != nil {
 			usage(os.Args[0])
 			os.Exit(1)
@@ -62,11 +46,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	app := tview.NewApplication()
-	menuList := tview.NewList()
-
 	// Create the menu of challenge days that have solutions
-	generateMenulist(app, menuList)
+	appInit()
+	generateMenulist()
 
 	if err := app.SetRoot(menuList, true).SetFocus(menuList).Run(); err != nil {
 		panic(err)
