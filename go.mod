@@ -3,8 +3,8 @@ module github.com/rchittaro/advent_of_code_2022
 go 1.19
 
 require (
-	github.com/gdamore/tcell v1.4.0
 	github.com/rivo/tview v0.0.0-20221128165837-db36428c92d9
+	github.com/ttdsuen/golang-stack v0.0.0-20211129132932-7cf92dfc8443
 )
 
 require (
