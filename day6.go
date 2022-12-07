@@ -93,7 +93,7 @@ func Day_6() {
 
 			if !signalFound {
 				charsRead++
-				fmt.Printf("%q [%d]\n", string(c), charsRead)
+
 				if ProcessSignal(c, 4) {
 					fmt.Println("Found Signal: ", charsRead)
 					signalFound = true
@@ -101,7 +101,7 @@ func Day_6() {
 			} else {
 				// Looking for messages now
 				charsRead++
-				fmt.Printf("Signal %q [%d]\n", string(c), charsRead)
+
 				if ProcessMessag(c, 14) {
 					fmt.Println("Found Message: ", charsRead)
 					break
