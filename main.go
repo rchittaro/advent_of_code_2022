@@ -10,6 +10,10 @@ import (
 var funcMap = map[int]func(){
 	1: Day_1,
 	2: Day_2,
+	3: Day_3,
+	4: Day_4,
+	5: Day_5,
+	6: Day_6,
 }
 
 func usage(progName string) {
@@ -31,6 +35,7 @@ func runSingleDay(dayi int) {
 // Main
 func main() {
 
+	Day_6()
 	// Check to see if the 'day' is provided on the command line. If so, we skip
 	// the gui and and just run that one..and we will use 'reflection'
 	if len(os.Args) == 2 {
