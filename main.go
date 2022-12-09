@@ -36,7 +36,6 @@ func runSingleDay(dayi int) {
 // Main
 func main() {
 
-	Day_6()
 	// Check to see if the 'day' is provided on the command line. If so, we skip
 	// the gui and and just run that one..and we will use 'reflection'
 	if len(os.Args) == 2 {
