@@ -16,6 +16,7 @@ var funcMap = map[int]func(){
 	6: Day_6,
 	7: Day_7,
 	8: Day_8,
+	9: Day_9,
 }
 
 func usage(progName string) {
